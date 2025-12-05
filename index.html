@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Lane | Personal Gallery</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="background-music" loop>
+        <source src="assets/music/background.mp3" type="audio/mpeg">
+        Your browser does not support audio element.
+    </audio>
+
+    <!-- Music Control -->
+    <div class="music-control">
+        <button id="music-toggle">
+            <i class="fas fa-music"></i>
+            <span>Music: ON</span>
+        </button>
+        <div class="volume-control">
+            <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.3">
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-heart"></i>
+                <span>Memory Lane</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#albums" class="nav-link"><i class="fas fa-images"></i> Photo Albums</a></li>
+                <li><a href="#videos" class="nav-link"><i class="fas fa-video"></i> Video Memories</a></li>
+                <li><a href="#journals" class="nav-link"><i class="fas fa-book"></i> Journals</a></li>
+                <li><a href="#timeline" class="nav-link"><i class="fas fa-stream"></i> Timeline</a></li>
+                <li><a href="admin.html" class="nav-link admin-btn"><i class="fas fa-cog"></i> Admin</a></li>
+            </ul>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search memories...">
+                <button id="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home/Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to Memory Lane</h1>
+            <p class="hero-subtitle">A personal gallery of cherished moments and treasured memories</p>
+            <div class="hero-actions">
+                <button class="btn-primary" onclick="scrollToSection('albums')">
+                    <i class="fas fa-images"></i> Browse Albums
+                </button>
+                <button class="btn-secondary" onclick="scrollToSection('timeline')">
+                    <i class="fas fa-history"></i> View Timeline
+                </button>
+            </div>
+            <div class="memory-counter">
+                <div class="counter-item">
+                    <i class="fas fa-camera"></i>
+                    <span id="photo-count">24</span>
+                    <p>Photos</p>
+                </div>
+                <div class="counter-item">
+                    <i class="fas fa-film"></i>
+                    <span id="video-count">8</span>
+                    <p>Videos</p>
+                </div>
+                <div class="counter-item">
+                    <i class="fas fa-book"></i>
+                    <span id="journal-count">15</span>
+                    <p>Journals</p>
+                </div>
+            </div>
+        </div>
+        <div class="floating-hearts">
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-tags">
+                <span class="filter-label">Filter by:</span>
+                <button class="filter-tag active" data-filter="all">All</button>
+                <button class="filter-tag" data-filter="family">Family</button>
+                <button class="filter-tag" data-filter="travel">Travel</button>
+                <button class="filter-tag" data-filter="friends">Friends</button>
+                <button class="filter-tag" data-filter="celebration">Celebrations</button>
+                <button class="filter-tag" data-filter="everyday">Everyday</button>
+            </div>
+            <div class="sort-controls">
+                <select id="sort-select">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="alphabetical">A-Z</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Albums Section -->
+    <section id="albums" class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-images"></i> Photo Albums
+            </h2>
+            <p class="section-subtitle">Browse through captured moments and happy memories</p>
+            
+            <div class="photo-grid" id="photo-gallery">
+                <!-- Photos will be loaded here dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Memories Section -->
+    <section id="videos" class="section dark-section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-video"></i> Video Memories
+            </h2>
+            <p class="section-subtitle">Relive special moments through videos</p>
+            
+            <div class="video-grid" id="video-gallery">
+                <!-- Videos will be loaded here dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Journals Section -->
+    <section id="journals" class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-book-open"></i> Memory Journals
+            </h2>
+            <p class="section-subtitle">Stories and thoughts tied to special moments</p>
+            
+            <div class="journal-container" id="journal-container">
+                <!-- Journals will be loaded here dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="section dark-section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-stream"></i> Memory Timeline
+            </h2>
+            <p class="section-subtitle">Your memories in chronological order</p>
+            
+            <div class="timeline" id="timeline-container">
+                <!-- Timeline items will be loaded here dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Memory Button (Floating) -->
+    <button class="add-memory-btn" onclick="location.href='admin.html'">
+        <i class="fas fa-plus"></i>
+        <span>Add Memory</span>
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-heart"></i> Memory Lane</h3>
+                    <p>A personal space for your cherished memories. Keep your moments alive forever.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#albums">Albums</a></li>
+                        <li><a href="#videos">Videos</a></li>
+                        <li><a href="#journals">Journals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Stats</h4>
+                    <div class="footer-stats">
+                        <p>Total Memories: <span id="total-memories">47</span></p>
+                        <p>This Month: <span id="month-memories">5</span></p>
+                        <p>Last Updated: <span id="last-updated">Today</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Memory Lane. Made with <i class="fas fa-heart"></i> for preserving precious moments.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="image-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modal-image">
+        <div id="modal-caption"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

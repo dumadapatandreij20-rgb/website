@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Memory Lane</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="admin-sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-cog"></i> Admin Panel</h2>
+                <p>Manage Your Memories</p>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active" data-tab="dashboard"><i class="fas fa-home"></i> Dashboard</li>
+                <li data-tab="photos"><i class="fas fa-images"></i> Photos</li>
+                <li data-tab="videos"><i class="fas fa-video"></i> Videos</li>
+                <li data-tab="journals"><i class="fas fa-book"></i> Journals</li>
+                <li data-tab="upload"><i class="fas fa-upload"></i> Upload</li>
+                <li data-tab="settings"><i class="fas fa-sliders-h"></i> Settings</li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Gallery
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="admin-main">
+            <!-- Header -->
+            <div class="admin-header">
+                <h1 id="admin-title">Dashboard</h1>
+                <div class="admin-actions">
+                    <button class="btn-save" id="save-all">
+                        <i class="fas fa-save"></i> Save All
+                    </button>
+                    <button class="btn-export" id="export-data">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Tab -->
+            <div class="admin-tab active" id="dashboard-tab">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-images"></i>
+                        <h3>Photos</h3>
+                        <p class="stat-count" id="admin-photo-count">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-video"></i>
+                        <h3>Videos</h3>
+                        <p class="stat-count" id="admin-video-count">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-book"></i>
+                        <h3>Journals</h3>
+                        <p class="stat-count" id="admin-journal-count">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-database"></i>
+                        <h3>Total</h3>
+                        <p class="stat-count" id="admin-total-count">0</p>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list" id="activity-list">
+                        <!-- Activity items will be added here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photos Tab -->
+            <div class="admin-tab" id="photos-tab">
+                <div class="tab-header">
+                    <h3>Manage Photos</h3>
+                    <button class="btn-add" onclick="showAddPhotoModal()">
+                        <i class="fas fa-plus"></i> Add Photo
+                    </button>
+                </div>
+                <div class="photo-list" id="photo-list">
+                    <!-- Photo items will be added here -->
+                </div>
+            </div>
+
+            <!-- Videos Tab -->
+            <div class="admin-tab" id="videos-tab">
+                <div class="tab-header">
+                    <h3>Manage Videos</h3>
+                    <button class="btn-add" onclick="showAddVideoModal()">
+                        <i class="fas fa-plus"></i> Add Video
+                    </button>
+                </div>
+                <div class="video-list" id="video-list">
+                    <!-- Video items will be added here -->
+                </div>
+            </div>
+
+            <!-- Journals Tab -->
+            <div class="admin-tab" id="journals-tab">
+                <div class="tab-header">
+                    <h3>Manage Journals</h3>
+                    <button class="btn-add" onclick="showAddJournalModal()">
+                        <i class="fas fa-plus"></i> Add Journal
+                    </button>
+                </div>
+                <div class="journal-list" id="journal-list">
+                    <!-- Journal items will be added here -->
+                </div>
+            </div>
+
+            <!-- Upload Tab -->
+            <div class="admin-tab" id="upload-tab">
+                <div class="upload-area" id="upload-area">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Drag & Drop Files Here</h3>
+                    <p>or click to browse</p>
+                    <input type="file" id="file-upload" multiple accept="image/*,video/*">
+                    <div class="upload-progress" id="upload-progress"></div>
+                </div>
+                <div class="upload-queue" id="upload-queue"></div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="admin-tab" id="settings-tab">
+                <div class="settings-grid">
+                    <div class="setting-card">
+                        <h3>Gallery Settings</h3>
+                        <div class="setting-item">
+                            <label>Background Music</label>
+                            <select id="music-setting">
+                                <option value="on">On</option>
+                                <option value="off">Off</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>Default Sort</label>
+                            <select id="sort-setting">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                                <option value="alphabetical">A-Z</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="setting-card">
+                        <h3>Backup & Restore</h3>
+                        <button class="btn-backup" onclick="backupData()">
+                            <i class="fas fa-download"></i> Backup Data
+                        </button>
+                        <button class="btn-restore" onclick="restoreData()">
+                            <i class="fas fa-upload"></i> Restore Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Photo Modal -->
+    <div class="modal" id="add-photo-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('add-photo-modal')">&times;</span>
+            <h3>Add New Photo</h3>
+            <form id="photo-form">
+                <input type="text" placeholder="Title" required>
+                <input type="date" required>
+                <input type="text" placeholder="Image URL" required>
+                <textarea placeholder="Caption" rows="3"></textarea>
+                <input type="text" placeholder="Tags (comma separated)">
+                <select>
+                    <option value="family">Family</option>
+                    <option value="travel">Travel</option>
+                    <option value="friends">Friends</option>
+                    <option value="celebration">Celebration</option>
+                    <option value="everyday">Everyday</option>
+                </select>
+                <button type="submit" class="btn-save">Add Photo</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Video Modal -->
+    <div class="modal" id="add-video-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('add-video-modal')">&times;</span>
+            <h3>Add New Video</h3>
+            <form id="video-form">
+                <input type="text" placeholder="Title" required>
+                <input type="date" required>
+                <input type="text" placeholder="Video URL/Embed Code" required>
+                <textarea placeholder="Description" rows="3"></textarea>
+                <input type="text" placeholder="Tags (comma separated)">
+                <select>
+                    <option value="family">Family</option>
+                    <option value="travel">Travel</option>
+                    <option value="friends">Friends</option>
+                    <option value="celebration">Celebration</option>
+                    <option value="everyday">Everyday</option>
+                </select>
+                <button type="submit" class="btn-save">Add Video</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Journal Modal -->
+    <div class="modal" id="add-journal-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('add-journal-modal')">&times;</span>
+            <h3>Add New Journal</h3>
+            <form id="journal-form">
+                <input type="text" placeholder="Title" required>
+                <input type="date" required>
+                <textarea placeholder="Content" rows="10" required></textarea>
+                <input type="text" placeholder="Tags (comma separated)">
+                <select>
+                    <option value="family">Family</option>
+                    <option value="travel">Travel</option>
+                    <option value="friends">Friends</option>
+                    <option value="celebration">Celebration</option>
+                    <option value="everyday">Everyday</option>
+                </select>
+                <button type="submit" class="btn-save">Add Journal</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
